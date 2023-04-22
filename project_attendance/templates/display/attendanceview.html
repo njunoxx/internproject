@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    {% load static %}
+    <title>Attendance Details</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/bootstrap.min.css' %}">
+    <script src='main.js'></script>
+</head>
+<body>
+    <h2 style="text-align: center;">Welcome to Attendance Details Page:</h2>
+    <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+    <br>
+    {% include 'partials/_message.html' %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Username</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time IN</th>
+            <th scope="col">Time OUT</th>
+            <th scope="col">Hours Worked</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for val in data %}  
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{val.username}}</td>
+            <td>{{val.date}}</td>
+            <td>{{val.time_in}}</td>
+            <td>{{val.time_out}}</td>
+            <td>{{val.hours_worked}}</td>
+            <td><a href="{% url 'attendance-edit' val.id %}">Edit</a></td>
+            <td><a href="{% url 'attendance-delete' val.id %}">Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>

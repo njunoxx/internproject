@@ -1,0 +1,17 @@
+{% extends 'layouts/master.html' %}
+<h1>Index page</h1>
+
+
+{% block content %}
+
+{% load static %}
+<link rel='stylesheet'  href="{% static '/css/bootstrap.min.css' %}">
+{% include 'partials/_message.html' %}
+
+<div class="container mt-5">
+    <div class="form-group d-flex justify-content-between align-items-center">
+        <h2>Hello, {{data.username|title}}!</h2>
+        <a href="{% url 'logout' %}" class="btn btn-primary ml-auto">LOGOUT</a>
+    </div>
+</div>
+{% endblock %}
