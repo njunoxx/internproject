@@ -17,12 +17,13 @@ class CustomUser(AbstractUser):
 class Attendance(models.Model):
     username = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date = models.DateField()
-    time_in = models.TimeField()
-    time_out = models.TimeField()
-    hours_worked = models.DurationField()
-    status = models.BooleanField(default=False)
+    shift_start = models.TimeField()
+    shift_end = models.TimeField()
+    present = models.BooleanField(default=False)
     def __str__(self):
         return str(self.username)
     
     class Meta:
         db_table = "app_attendance"
+        
+    REQUIRED_FIELDS = []

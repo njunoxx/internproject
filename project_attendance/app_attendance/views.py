@@ -106,7 +106,7 @@ def user_logout(request):
     return redirect('login')
 
 # To Add Attendance of the Users
-login_required(login_url='login')
+@login_required(login_url='login')
 def add_attendance(request):
     attendance = CustomUser.objects.filter(username=request.user)
     context = {"data" : attendance}

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_attendance.models import CustomUser
+from app_attendance.models import CustomUser, Attendance
 from django.contrib.auth import get_user_model
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -36,3 +36,24 @@ class SuperUserRegistrationSerializer(serializers.ModelSerializer):
         gender=validated_data.get('gender'),    
         )
         return user
+ 
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ("id", "username", "password", "email", "address", "contact", "gender")
+        extra_kwargs = {'password': {'write_only':True, 'required':False}}
+
+class UserAttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ("id", "username", "date", "shift_start", "shift_end", "present")
+
+class UseraddAttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = ("date", "present")
+
+# class UserUpdateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CustomUser
+#         fields = ('id', 'username', 'email', 'address', 'contact', 'gender')
